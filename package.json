@@ -1,0 +1,29 @@
+{
+  "name": "mcp-demo-release-status",
+  "version": "1.0.0",
+  "description": "MCP server for automating Release Status v2.4.0 demo (GitHub + Google Drive)",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-demo-release-status": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "tsc -p tsconfig.json --watch"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "googleapis": "^144.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.4"
+  }
+}
