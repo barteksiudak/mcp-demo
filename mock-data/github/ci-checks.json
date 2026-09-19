@@ -1,0 +1,34 @@
+{
+  "ref": "refs/heads/main",
+  "commit_sha": "a8f3b192e4c76d081f2345e6789abcde01234567",
+  "pipeline_id": "ci-run-84920",
+  "timestamp": "2026-09-19T10:15:00Z",
+  "overall_status": "failed",
+  "checks": [
+    {
+      "name": "lint & static-analysis",
+      "status": "passed",
+      "duration_seconds": 45,
+      "details_url": "https://ci.local/builds/84920/lint"
+    },
+    {
+      "name": "unit-tests",
+      "status": "passed",
+      "duration_seconds": 180,
+      "details_url": "https://ci.local/builds/84920/unit"
+    },
+    {
+      "name": "e2e-regression-tests",
+      "status": "failed",
+      "duration_seconds": 420,
+      "details_url": "https://ci.local/builds/84920/e2e",
+      "failure_summary": "1 failed test: AuthFlowTest.test_refresh_token_revocation_on_concurrent_requests (HTTP 401 instead of 200)"
+    },
+    {
+      "name": "security-vulnerability-scan",
+      "status": "passed",
+      "duration_seconds": 65,
+      "details_url": "https://ci.local/builds/84920/security"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "number": 140,
+    "title": "feat(core): implement modern caching layer for user preferences",
+    "author": "annak",
+    "state": "merged",
+    "target_branch": "main",
+    "merged_at": "2026-09-18T14:20:00Z",
+    "labels": ["enhancement", "release-2.4.0"]
+  },
+  {
+    "number": 141,
+    "title": "fix(api): resolve timeout issues on bulk export endpoint",
+    "author": "tomasz_dev",
+    "state": "merged",
+    "target_branch": "main",
+    "merged_at": "2026-09-19T08:15:00Z",
+    "labels": ["bugfix", "release-2.4.0"]
+  },
+  {
+    "number": 142,
+    "title": "feat(auth): refresh token rotation and session revocation",
+    "author": "barteksiudak",
+    "state": "merged",
+    "target_branch": "main",
+    "merged_at": "2026-09-19T09:45:00Z",
+    "labels": ["security", "release-2.4.0", "needs-qa"]
+  },
+  {
+    "number": 143,
+    "title": "docs: update API reference for v2.4.0 endpoints",
+    "author": "m_nowak",
+    "state": "open",
+    "target_branch": "main",
+    "merged_at": null,
+    "labels": ["documentation", "in-review"]
+  }
+]
