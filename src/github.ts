@@ -58,21 +58,21 @@ export async function fetchGithubReleaseData(
 
     if (status === 401 || status === 403) {
       throw new GithubApiError(
-        "Brak autoryzacji do GitHub API. Sprawdź, czy GITHUB_PERSONAL_ACCESS_TOKEN " +
-          "jest ustawiony i posiada uprawnienia do odczytu repozytorium.",
+        "GitHub API authorization failed. Check that GITHUB_PERSONAL_ACCESS_TOKEN " +
+          "is set and has permission to read the repository.",
         status
       );
     }
     if (status === 404) {
       throw new GithubApiError(
-        `Nie znaleziono pliku "mock-data/github/${fileName}" w repozytorium ${owner}/${repo}.`,
+        `File "mock-data/github/${fileName}" not found in repository ${owner}/${repo}.`,
         status
       );
     }
 
     throw new GithubApiError(
-      `Błąd podczas komunikacji z GitHub API: ${
-        axiosError.message || "nieznany błąd"
+      `GitHub API communication error: ${
+        axiosError.message || "unknown error"
       }`,
       status
     );

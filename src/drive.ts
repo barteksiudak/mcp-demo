@@ -26,8 +26,8 @@ async function getDriveClient(): Promise<drive_v3.Drive> {
   if (serviceAccountKeyPath) {
     if (!fs.existsSync(serviceAccountKeyPath)) {
       throw new DriveApiError(
-        `Nie znaleziono pliku klucza service account pod ścieżką: ${serviceAccountKeyPath}. ` +
-          "Sprawdź zmienną GOOGLE_SERVICE_ACCOUNT_KEY_PATH w pliku .env."
+        `Service account key file not found at: ${serviceAccountKeyPath}. ` +
+          "Check the GOOGLE_SERVICE_ACCOUNT_KEY_PATH variable in the .env file."
       );
     }
     const auth = new google.auth.GoogleAuth({
@@ -44,8 +44,8 @@ async function getDriveClient(): Promise<drive_v3.Drive> {
   }
 
   throw new DriveApiError(
-    "Brak konfiguracji dostępu do Google Drive API. Ustaw GOOGLE_SERVICE_ACCOUNT_KEY_PATH " +
-      "(zalecane) lub GOOGLE_API_KEY w pliku .env."
+    "Google Drive API access is not configured. Set GOOGLE_SERVICE_ACCOUNT_KEY_PATH " +
+      "(recommended) or GOOGLE_API_KEY in the .env file."
   );
 }
 
@@ -55,19 +55,19 @@ function toDriveApiError(error: unknown, context: string): DriveApiError {
 
   if (status === 401 || status === 403) {
     return new DriveApiError(
-      `Brak autoryzacji do Google Drive API (${context}). Sprawdź uprawnienia service accounta ` +
-        "lub upewnij się, że folder został z nim udostępniony.",
+      `Google Drive API authorization failed (${context}). Check the service account permissions ` +
+        "or make sure the folder has been shared with it.",
       status
     );
   }
   if (status === 404) {
     return new DriveApiError(
-      `Nie znaleziono zasobu w Google Drive (${context}).`,
+      `Google Drive resource not found (${context}).`,
       status
     );
   }
   return new DriveApiError(
-    `Błąd Google Drive API (${context}): ${err.message || "nieznany błąd"}`,
+    `Google Drive API error (${context}): ${err.message || "unknown error"}`,
     status
   );
 }
@@ -104,12 +104,12 @@ export async function searchDriveDocuments(
 
     return (response.data.files || []).map((file) => ({
       id: file.id || "",
-      name: file.name || "(bez nazwy)",
+      name: file.name || "(untitled)",
       mimeType: file.mimeType || "unknown",
       modifiedTime: file.modifiedTime,
     }));
   } catch (error) {
-    throw toDriveApiError(error, `wyszukiwanie w folderze ${folderId}`);
+    throw toDriveApiError(error, `searching folder ${folderId}`);
   }
 }
 
@@ -132,7 +132,7 @@ export async function readDriveDocument(fileId: string): Promise<{
     });
     meta = metaResponse.data;
   } catch (error) {
-    throw toDriveApiError(error, `pobieranie metadanych pliku ${fileId}`);
+    throw toDriveApiError(error, `fetching metadata for file ${fileId}`);
   }
 
   const isGoogleNative = meta.mimeType?.startsWith(
@@ -163,6 +163,6 @@ export async function readDriveDocument(fileId: string): Promise<{
       content: buffer.toString("utf-8"),
     };
   } catch (error) {
-    throw toDriveApiError(error, `pobieranie treści pliku ${fileId}`);
+    throw toDriveApiError(error, `fetching content for file ${fileId}`);
   }
 }
